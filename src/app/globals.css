@@ -48,3 +48,8 @@ button:active :not(:disabled),
 a:active :not(:disabled) {
     opacity: 0.6;
 }
+
+textarea {
+  resize: none;
+}
+

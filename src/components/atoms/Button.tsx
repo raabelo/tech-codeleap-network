@@ -25,7 +25,7 @@ export default function Button({
             {...props}
             type={type}
             className={`
-                px-8 py-2 rounded-lg transition-colors
+                px-8 py-1.5 rounded-lg transition-colors
                 ${VARIANT_STYLES[variant]}
                 ${props.className}
             `}
