@@ -5,6 +5,10 @@
     --foreground: #dddddd;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -30,5 +34,17 @@
 body {
     background: var(--foreground);
     color: var(--background);
-    font-family: var(--font-sans), var(--font-robot), Helvetica, sans-serif;
+    font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+button,
+a {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+button:active :not(:disabled),
+a:active :not(:disabled) {
+    opacity: 0.6;
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import ReactQueryProvider from "@/contexts/ReactQuertContext";
 
 const roboto = Roboto({
     subsets: ["latin"],
-    display: "swap",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
     variable: "--font-roboto",
 });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="pt">
-            <body className={`${roboto.variable} antialiased`}>{children}</body>
+            <body className={`${roboto.variable} antialiased`}>
+                <ReactQueryProvider>{children}</ReactQueryProvider>
+            </body>
         </html>
     );
 }
