@@ -14,6 +14,7 @@ export default function ArticleList() {
 
     const { data, isLoading, isError } = useArticles({ page, search });
 
+    //TODO: handle properly
     if (isLoading) return <p>Carregando artigos...</p>;
     if (isError || !data) return <p>Erro ao carregar artigos</p>;
 

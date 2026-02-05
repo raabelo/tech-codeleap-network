@@ -30,11 +30,18 @@ const translationsEN = {
             },
             search: {
                 input: {
-                    placeholder: "Search articles..."
-                }
-            }
+                    placeholder: "Search articles...",
+                },
+            },
+            modal: {
+                delete: {
+                    title: "Are you sure you want to delete this item?",
+                    submit: "Delete",
+                },
+            },
         },
         common: {
+            cancel: "Cancel",
             timeAgo: {
                 seconds: "seconds ago",
                 minutes: "minutes ago",
