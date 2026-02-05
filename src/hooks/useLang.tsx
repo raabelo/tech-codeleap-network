@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { TranslationKeys } from "@/i18n/types";
 import { Language } from "@/i18n/types/settings";
@@ -8,6 +8,12 @@ import { useTranslation } from "react-i18next";
 import { TRANSLATIONS_EN } from "@/i18n/locales/en";
 import { TRANSLATIONS_PT } from "@/i18n/locales/pt";
 import { TRANSLATIONS_FR } from "@/i18n/locales/fr";
+
+export type TranslateFn = {
+    (key: TranslationKeys): string;
+    (key: TranslationKeys, variables?: Record<string, string>): string;
+    (key: TranslationKeys, variables?: Record<string, ReactNode>): ReactNode;
+};
 
 type GetMessageFn = (
     overrides?: Record<string, string>,

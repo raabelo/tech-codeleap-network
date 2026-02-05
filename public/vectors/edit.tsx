@@ -1,6 +1,6 @@
 import { IconProps } from "@/utils/types/props/IconProps";
 
-export default function IconEdit({ width, height, color }: IconProps) {
+export default function IconEdit({ width = 32, height = 30, color = "white" }: IconProps) {
     return (
         <svg
             width={width}

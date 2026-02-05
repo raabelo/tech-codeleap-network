@@ -29,6 +29,18 @@ const translationsEN = {
                 },
             },
         },
+        common: {
+            timeAgo: {
+                seconds: "seconds ago",
+                minutes: "minutes ago",
+                hours: "hours ago",
+                days: "days ago",
+                weeks: "weeks ago",
+                months: "months ago",
+                years: "years ago",
+            },
+            seeMore: { expand: "see more", retract: "retract" },
+        },
     },
 };
 
