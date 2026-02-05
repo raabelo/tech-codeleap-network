@@ -2,20 +2,37 @@
 
 import { useState } from "react";
 import { useLang } from "@/hooks/useLang";
-import { useAuth } from "@/hooks/mutations/useAuth";
 import Form from "../molecules/Form";
 import FormField from "../molecules/FormField";
+import { getUser } from "@/utils/cookies/user";
+import { useCreateArticle } from "@/hooks/mutations/useArticles";
 
 export default function ArticleForm() {
     const t = useLang();
+    const mutation = useCreateArticle();
 
-    const [username, setUsername] = useState("");
-    const [bio, setBio] = useState("");
-
-    const authMutation = useAuth();
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const username = getUser();
+        if (!username || !title.trim() || !content.trim()) return;
+
+        mutation.mutate(
+            {
+                username,
+                title: title.trim(),
+                content: content.trim(),
+            },
+            {
+                onSuccess: () => {
+                    setTitle("");
+                    setContent("");
+                },
+            },
+        );
     };
 
     return (
@@ -23,27 +40,28 @@ export default function ArticleForm() {
             title={t("codeleap.home.form.title")}
             onSubmit={handleSubmit}
             submitLabel={t("codeleap.home.form.controls.submit")}
-            isSubmitting={authMutation.isPending}
-            submitDisabled={!username.trim()}
+            isSubmitting={mutation.isPending}
+            submitDisabled={!title.trim() || !content.trim()}
         >
             <FormField
-                id="username"
+                id="title"
                 label={t("codeleap.home.form.fields.title.label")}
-                value={username}
-                onChange={setUsername}
+                value={title}
+                onChange={setTitle}
                 placeholder={t("codeleap.home.form.fields.title.placeholder")}
-                maxLength={20}
+                maxLength={100}
                 required
             />
 
             <FormField
-                id="bio"
+                id="content"
                 label={t("codeleap.home.form.fields.content.label")}
-                value={bio}
-                onChange={setBio}
+                value={content}
+                onChange={setContent}
                 placeholder={t("codeleap.home.form.fields.content.placeholder")}
                 multiline
                 rows={6}
+                required
             />
         </Form>
     );

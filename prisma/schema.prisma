@@ -24,7 +24,7 @@ model Article {
   title    String
   content  String
 
-  parentArticleId String
+  parentArticleId String?
 
   likes    String[]
   dislikes String[]

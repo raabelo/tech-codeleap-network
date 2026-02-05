@@ -28,6 +28,11 @@ const translationsEN = {
                     submit: "Create",
                 },
             },
+            search: {
+                input: {
+                    placeholder: "Search articles..."
+                }
+            }
         },
         common: {
             timeAgo: {
