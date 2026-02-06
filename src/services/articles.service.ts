@@ -9,17 +9,20 @@ import {
 import { PaginatedResponse } from "@/utils/types/Responses";
 
 export const articlesService = {
-    getAll: (params?: GetAllArticlesParams) =>
-        api.get<PaginatedResponse<ArticleEntity>>("/articles", { params }).then((res) => res.data),
+    getAll: async (params?: GetAllArticlesParams) =>
+        await api
+            .get<PaginatedResponse<ArticleEntity>>("/articles", { params })
+            .then((res) => res.data),
 
-    create: (data: CreateArticleInput) =>
-        api.post<ArticleEntity>("/articles", data).then((res) => res.data),
+    create: async (data: CreateArticleInput) =>
+        await api.post<ArticleEntity>("/articles", data).then((res) => res.data),
 
-    update: (id: string, data: UpdateArticleInput) =>
-        api.put<ArticleEntity>(`/articles/${id}`, data).then((res) => res.data),
+    update: async (id: string, data: UpdateArticleInput) =>
+        await api.put<ArticleEntity>(`/articles/${id}`, data).then((res) => res.data),
 
-    remove: (id: string, username: string) => api.delete(`/articles/${id}`, { data: { username } }),
+    remove: async (id: string, username: string) =>
+        await api.delete(`/articles/${id}`, { data: { username } }),
 
-    react: (id: string, data: ArticleReactionInput) =>
-        api.post<ArticleEntity>(`/articles/${id}/reaction`, data).then((res) => res.data),
+    react: async (id: string, data: ArticleReactionInput) =>
+        await api.post<ArticleEntity>(`/articles/${id}/reaction`, data).then((res) => res.data),
 };

@@ -6,6 +6,7 @@ import Form from "../molecules/Form";
 import FormField from "../molecules/FormField";
 import { getUser } from "@/utils/cookies/user";
 import { useCreateArticle } from "@/hooks/mutations/useArticles";
+import toast from "react-hot-toast";
 
 export default function ArticleForm() {
     const t = useLang();
@@ -28,6 +29,7 @@ export default function ArticleForm() {
             },
             {
                 onSuccess: () => {
+                    toast.success(t("codeleap.home.form.toasts.success"));
                     setTitle("");
                     setContent("");
                 },
@@ -60,7 +62,8 @@ export default function ArticleForm() {
                 onChange={setContent}
                 placeholder={t("codeleap.home.form.fields.content.placeholder")}
                 multiline
-                rows={6}
+                maxLength={1000}
+                rows={4}
                 required
             />
         </Form>

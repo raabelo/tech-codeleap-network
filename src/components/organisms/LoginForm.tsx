@@ -6,6 +6,7 @@ import { useLang } from "@/hooks/useLang";
 import { useAuth } from "@/hooks/mutations/useAuth";
 import Form from "../molecules/Form";
 import FormField from "../molecules/FormField";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
     const t = useLang();
@@ -22,6 +23,10 @@ export default function LoginForm() {
 
         authMutation.mutate(username, {
             onSuccess: () => router.replace("/"),
+            onError: (err: Error) => {
+                console.error(err);
+                toast.error(t("codeleap.login.form.toasts.fail") + ":\n" + err.message);
+            },
         });
     };
 

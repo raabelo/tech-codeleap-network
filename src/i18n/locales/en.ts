@@ -14,10 +14,16 @@ const translationsEN = {
                 controls: {
                     submit: "ENTER",
                 },
+                toasts: {
+                    fail: "Couldn't sign in",
+                },
             },
         },
         home: {
-            title: "CodeLeap Network",
+            header: {
+                title: "CodeLeap Network",
+                logout: { toast: { success: "Logged out successfully", fail: "Couldn't log out" } },
+            },
             form: {
                 title: "What’s on your mind?",
                 fields: {
@@ -26,6 +32,10 @@ const translationsEN = {
                 },
                 controls: {
                     submit: "Create",
+                },
+                toasts: {
+                    success: "Post created successfully",
+                    fail: "Post not created",
                 },
             },
             search: {
@@ -37,19 +47,40 @@ const translationsEN = {
                 delete: {
                     title: "Are you sure you want to delete this item?",
                     submit: "Delete",
+                    toasts: {
+                        success: "Post deleted successfully",
+                        fail: "Post not deleted",
+                    },
+                },
+                edit: {
+                    title: "Edit item",
+                    submit: "Save",
+                    form: {
+                        fields: {
+                            title: { label: "Title", placeholder: "Hello world" },
+                            content: { label: "Content", placeholder: "Content here" },
+                        },
+                    },
+                    toasts: {
+                        success: "Post edited successfully",
+                        fail: "Post not edited",
+                    },
                 },
             },
         },
         common: {
             cancel: "Cancel",
             timeAgo: {
-                seconds: "seconds ago",
-                minutes: "minutes ago",
-                hours: "hours ago",
-                days: "days ago",
-                weeks: "weeks ago",
-                months: "months ago",
-                years: "years ago",
+                time: {
+                    seconds: { singular: "second", plural: "seconds" },
+                    minutes: { singular: "minute", plural: "minutes" },
+                    hours: { singular: "hour", plural: "hours" },
+                    days: { singular: "day", plural: "days" },
+                    weeks: { singular: "week", plural: "weeks" },
+                    months: { singular: "month", plural: "months" },
+                    years: { singular: "year", plural: "years" },
+                },
+                ago: "ago",
             },
             seeMore: { expand: "see more", retract: "retract" },
         },

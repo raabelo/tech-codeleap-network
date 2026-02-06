@@ -1,20 +1,16 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useArticles } from "@/hooks/queries/useArticles";
 import ArticleCard from "../molecules/ArticleCard";
-import Input from "../atoms/Input";
-import { useLang } from "@/hooks/useLang";
+import ListFilter from "../molecules/ListFilter";
 
 export default function ArticleList() {
-    const t = useLang();
-
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
 
     const { data, isLoading, isError } = useArticles({ page, search });
 
-    //TODO: handle properly
     if (isLoading) return <p>Carregando artigos...</p>;
     if (isError || !data) return <p>Erro ao carregar artigos</p>;
 
@@ -22,15 +18,7 @@ export default function ArticleList() {
 
     return (
         <section className="space-y-4">
-            <Input
-                type="text"
-                placeholder={t("codeleap.home.search.input.placeholder")}
-                value={search}
-                onChange={(e: { target: { value: SetStateAction<string> } }) => {
-                    setSearch(e.target.value);
-                    setPage(1);
-                }}
-            />
+            <ListFilter search={search} setSearch={setSearch} setPage={setPage} />
 
             <div className="space-y-4">
                 {articles.map((article) => (

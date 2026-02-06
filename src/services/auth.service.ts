@@ -9,15 +9,18 @@ type LoginResponse = {
 };
 
 export const authService = {
-    connect(username: string) {
-        return api.post<ConnectResponse>("/auth", {
+    connect: async (username: string) =>
+        await api.post<ConnectResponse>("/auth", {
             username,
-        });
-    },
+        }),
 
-    login(username: string) {
-        return api.post<LoginResponse>("/auth/login", {
+    login: async (username: string) =>
+        await api.post<LoginResponse>("/auth/login", {
             username,
-        });
-    },
+        }),
+
+    logout: async (username: string) =>
+        await api.post("/auth/logout", {
+            username,
+        }),
 };

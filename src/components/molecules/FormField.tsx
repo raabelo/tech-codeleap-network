@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
 import Input from "@/components/atoms/Input";
 
 interface FormFieldProps {
     id: string;
-    label: ReactNode;
+    label: React.ReactNode;
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
@@ -27,16 +26,15 @@ export default function FormField({
     return (
         <div>
             <label htmlFor={id}>{label}</label>
-
             <Input
                 id={id}
                 value={value}
-                multiline={multiline}
-                rows={rows}
-                onChange={(e: { target: { value: string } }) => onChange(e.target.value)}
+                onChange={onChange}
                 placeholder={placeholder}
                 maxLength={maxLength}
                 required={required}
+                multiline={multiline}
+                rows={rows}
             />
         </div>
     );

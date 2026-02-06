@@ -11,7 +11,13 @@ export default function ArticleCard(article: Article) {
 
     return (
         <article id={article.id} className="rounded-2xl border border-neutral-dark overflow-hidden">
-            <ArticleHeader title={article.title} username={article.username} currentUser={user} />
+            <ArticleHeader
+                id={article.id}
+                title={article.title}
+                content={article.content}
+                username={article.username}
+                currentUser={user}
+            />
             <ArticleContent
                 username={article.username}
                 content={article.content}

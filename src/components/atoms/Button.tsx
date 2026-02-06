@@ -8,9 +8,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANT_STYLES: Record<ButtonVariant, string> = {
     primary: "bg-primary hover:bg-blue-700 text-white disabled:bg-neutral-light",
-    danger: "bg-danger hover:bg-red-700 text-white",
-    success: "bg-success hover:bg-green-700 text-white",
-    info: "bg-transparent border border-neutral-dark text-black",
+    danger: "bg-danger hover:bg-red-700 text-white disabled:bg-neutral-light",
+    success: "bg-success hover:bg-green-700 text-white disabled:bg-neutral-light",
+    info: "bg-transparent border border-neutral-dark text-black disabled:bg-neutral-light",
 };
 
 export default function Button({

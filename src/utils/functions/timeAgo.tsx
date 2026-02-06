@@ -27,9 +27,15 @@ export function timeAgo(date: Date | string, t: TranslateFn): string {
         if (diffInSeconds >= seconds) {
             const amount = Math.floor(diffInSeconds / seconds);
 
-            return `${amount} ${t(`codeleap.common.timeAgo.${unit}`)}`;
+            const unitText =
+                amount === 1
+                    ? t(`codeleap.common.timeAgo.time.${unit}.singular`)
+                    : t(`codeleap.common.timeAgo.time.${unit}.plural`);
+
+            return `${amount} ${unitText} ${t("codeleap.common.timeAgo.ago")}`;
         }
     }
 
-    return t("codeleap.common.timeAgo.seconds") as string;
+    const unitText = t(`codeleap.common.timeAgo.time.seconds.plural`);
+    return `0 ${unitText} ${t("codeleap.common.timeAgo.ago")}`;
 }

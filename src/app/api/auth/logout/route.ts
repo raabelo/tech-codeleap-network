@@ -25,16 +25,18 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "user not found" }, { status: 404 });
     }
 
-    if (user.connectedIn && user.connectedIn !== ip) {
-        return NextResponse.json({ error: "invalid ip or username" }, { status: 401 });
-    }
-    
     if (!user.connectedIn) {
-        await prisma.user.update({
-            where: { username: username },
-            data: { connectedIn: ip },
-        });
+        return NextResponse.json({ error: "user not connected yet" }, { status: 401 });
     }
 
-    return NextResponse.json({ message: "login successful" }, { status: 200 });
+    if (user.connectedIn !== ip) {
+        return NextResponse.json({ error: "invalid ip or username" }, { status: 401 });
+    }
+
+    await prisma.user.update({
+        where: { username: normalizedUsername },
+        data: { connectedIn: null },
+    });
+
+    return NextResponse.json({ message: "loggedout successfully" }, { status: 200 });
 }

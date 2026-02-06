@@ -44,12 +44,11 @@ a {
     transition: all 0.2s ease-in-out;
 }
 
-button:active :not(:disabled),
-a:active :not(:disabled) {
+button:not([disabled]):active,
+a:not([disabled]):active {
     opacity: 0.6;
 }
 
 textarea {
   resize: none;
 }
-

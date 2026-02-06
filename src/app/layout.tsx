@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/contexts/ReactQuertContext";
-import { ModalProvider } from "@/contexts/ModalContext";
+import { Toaster } from "react-hot-toast";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -24,7 +24,8 @@ export default function RootLayout({
         <html lang="pt">
             <body className={`${roboto.variable} antialiased`}>
                 <ReactQueryProvider>
-                    <ModalProvider>{children}</ModalProvider>
+                    {children}
+                    <Toaster />
                 </ReactQueryProvider>
             </body>
         </html>
