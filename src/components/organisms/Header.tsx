@@ -2,6 +2,7 @@
 
 import { useLang } from "@/hooks/useLang";
 import ModalLogout from "./ModalLogout";
+import LanguageSwitcher from "../molecules/LanguageSwitcher";
 
 export default function Header() {
     const t = useLang();
@@ -15,7 +16,10 @@ export default function Header() {
             <h1 tabIndex={0} onClick={backToTop} className="cursor-pointer w-fit">
                 {t("codeleap.home.header.title")}
             </h1>
-            <ModalLogout />
+            <div className="flex flex-row gap-6">
+                <LanguageSwitcher />
+                <ModalLogout />
+            </div>
         </header>
     );
 }

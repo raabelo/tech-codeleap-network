@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/contexts/ReactQuertContext";
 import { Toaster } from "react-hot-toast";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -24,8 +25,10 @@ export default function RootLayout({
         <html lang="pt" className="overflow-x-hidden md:overflow-x-visible">
             <body className={`${roboto.variable} antialiased`}>
                 <ReactQueryProvider>
-                    {children}
-                    <Toaster />
+                    <LanguageProvider>
+                        {children}
+                        <Toaster />
+                    </LanguageProvider>
                 </ReactQueryProvider>
             </body>
         </html>
