@@ -28,6 +28,10 @@ export default function ModalEdit({ id, title, content }: ModalEditProps) {
 
     const [editFields, setEditFields] = useState({ title, content });
 
+    const clearFields = () => {
+        setEditFields({ title: "", content: "" });
+    };
+
     if (!user) return null;
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -38,6 +42,7 @@ export default function ModalEdit({ id, title, content }: ModalEditProps) {
                 onSuccess: () => {
                     toast.success(t("codeleap.home.modal.edit.toasts.success"));
                     setIsModalOpen(false);
+                    clearFields();
                 },
                 onError: (err: Error) =>
                     toast.error(
@@ -58,7 +63,10 @@ export default function ModalEdit({ id, title, content }: ModalEditProps) {
             </button>
             <Modal
                 isOpen={isModalOpen}
-                close={() => setIsModalOpen(false)}
+                close={() => {
+                    clearFields();
+                    setIsModalOpen(false);
+                }}
                 title={t("codeleap.home.modal.edit.title")}
                 content={
                     <Form
@@ -84,7 +92,7 @@ export default function ModalEdit({ id, title, content }: ModalEditProps) {
                             placeholder={t(
                                 "codeleap.home.modal.edit.form.fields.content.placeholder",
                             )}
-                            maxLength={100}
+                            maxLength={1000}
                             multiline
                             rows={4}
                         />

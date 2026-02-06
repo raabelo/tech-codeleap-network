@@ -21,7 +21,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="pt">
+        <html lang="pt" className="overflow-x-hidden md:overflow-x-visible">
             <body className={`${roboto.variable} antialiased`}>
                 <ReactQueryProvider>
                     {children}

@@ -11,7 +11,7 @@ export default function Header() {
     };
 
     return (
-        <header className="bg-primary text-white w-full py-7 px-9 text-2xl font-bold border-b border-neutral-dark sticky top-0 flex flex-row justify-between z-20">
+        <header className="bg-primary text-white w-full py-7 px-9 text-2xl font-bold border-b border-neutral-dark md:sticky top-0 flex flex-row justify-between z-20">
             <h1 tabIndex={0} onClick={backToTop} className="cursor-pointer w-fit">
                 {t("codeleap.home.header.title")}
             </h1>

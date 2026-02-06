@@ -7,13 +7,17 @@ import {
     UpdateArticleInput,
 } from "@/utils/types/Article";
 
+function helperInvalidateQuery(qc: ReturnType<typeof useQueryClient>) {
+    qc.invalidateQueries({ queryKey: ["articles"] });
+}
+
 export function useCreateArticle() {
     const qc = useQueryClient();
 
     return useMutation<ArticleEntity, Error, CreateArticleInput>({
         mutationFn: articlesService.create,
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ["articles"] });
+            helperInvalidateQuery(qc);
         },
     });
 }
@@ -24,7 +28,7 @@ export function useUpdateArticle() {
     return useMutation<ArticleEntity, Error, { id: string; data: UpdateArticleInput }>({
         mutationFn: ({ id, data }) => articlesService.update(id, data),
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ["articles"] });
+            helperInvalidateQuery(qc);
         },
     });
 }
@@ -37,7 +41,7 @@ export function useDeleteArticle() {
             await articlesService.remove(id, username);
         },
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ["articles"] });
+            helperInvalidateQuery(qc);
         },
     });
 }
@@ -48,7 +52,7 @@ export function useReactArticle() {
     return useMutation<ArticleEntity, Error, { id: string; data: ArticleReactionInput }>({
         mutationFn: ({ id, data }) => articlesService.react(id, data),
         onSuccess: () => {
-            qc.invalidateQueries({ queryKey: ["articles"] });
+            helperInvalidateQuery(qc);
         },
     });
 }

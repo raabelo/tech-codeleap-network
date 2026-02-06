@@ -5,6 +5,10 @@
     --foreground: #dddddd;
 }
 
+html {
+    max-width: 100svw;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -36,6 +40,8 @@ body {
     color: var(--background);
     font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
     min-height: 100vh;
+    max-width: 100svw;
+    overflow-x: hidden;
 }
 
 button,
@@ -50,5 +56,6 @@ a:not([disabled]):active {
 }
 
 textarea {
-  resize: none;
+    resize: none;
+    outline: none;
 }

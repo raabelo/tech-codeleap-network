@@ -31,6 +31,7 @@ export default function ModalLogout() {
     const handleLogout = () => {
         logout.mutate(user, {
             onSuccess: () => {
+                setIsModalOpen(false);
                 toast.success(t("codeleap.home.header.logout.toast.success"));
                 router.replace("/login");
             },
@@ -49,10 +50,10 @@ export default function ModalLogout() {
             <Modal
                 isOpen={isModalOpen}
                 close={() => setIsModalOpen(false)}
-                title={t("codeleap.home.modal.delete.title")}
+                title={t("codeleap.home.modal.logout.title")}
                 submitButton={
                     <Button variant="danger" onClick={handleLogout} disabled={logout.isPending}>
-                        {logout.isPending ? <Loader /> : t("codeleap.home.modal.delete.submit")}
+                        {logout.isPending ? <Loader /> : t("codeleap.home.modal.logout.submit")}
                     </Button>
                 }
             />

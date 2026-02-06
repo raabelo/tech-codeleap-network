@@ -5,12 +5,13 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onCha
     value: string;
     onChange: (value: string) => void;
     rows?: number;
+    icon?: React.ReactNode;
 }
 
 const baseClasses = "border border-neutral-dark rounded-lg w-full py-1.5 px-3";
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
-    ({ multiline, className, value, onChange, maxLength, ...props }, ref) => {
+    ({ multiline, className, value, onChange, maxLength, icon, ...props }, ref) => {
         const [hasVerticalScroll, setHasVerticalScroll] = useState(false);
 
         const localRef = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
@@ -47,14 +48,17 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
                         {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
                     />
                 ) : (
-                    <input
-                        ref={combinedRef as React.RefObject<HTMLInputElement>}
-                        className={`${baseClasses} ${className || ""}`}
-                        maxLength={maxLength}
-                        value={value}
-                        onChange={handleChange}
-                        {...props}
-                    />
+                    <div className={`${baseClasses} ${className || ""} flex flex-row gap-2`}>
+                        {icon}
+                        <input
+                            ref={combinedRef as React.RefObject<HTMLInputElement>}
+                            className="size-full outline-0"
+                            maxLength={maxLength}
+                            value={value}
+                            onChange={handleChange}
+                            {...props}
+                        />
+                    </div>
                 )}
                 {characterCounter && (
                     <span

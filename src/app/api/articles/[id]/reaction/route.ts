@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest, context: { params: Promise<{ id: string }> }) {
     const { id } = await context.params;
-    const { userId, type } = await req.json();
+    const { username, reaction } = await req.json();
 
     const article = await prisma.article.findUnique({
         where: { id },
@@ -16,14 +16,22 @@ export async function POST(req: NextRequest, context: { params: Promise<{ id: st
     const likes = new Set(article.likes);
     const dislikes = new Set(article.dislikes);
 
-    if (type === "like") {
-        likes.add(userId);
-        dislikes.delete(userId);
+    if (reaction === "like") {
+        if (likes.has(username)) {
+            likes.delete(username);
+        } else {
+            likes.add(username);
+            dislikes.delete(username);
+        }
     }
 
-    if (type === "dislike") {
-        dislikes.add(userId);
-        likes.delete(userId);
+    if (reaction === "dislike") {
+        if (dislikes.has(username)) {
+            dislikes.delete(username);
+        } else {
+            dislikes.add(username);
+            likes.delete(username);
+        }
     }
 
     const updated = await prisma.article.update({

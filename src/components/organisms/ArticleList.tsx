@@ -1,44 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import { useArticles } from "@/hooks/queries/useArticles";
-import ArticleCard from "../molecules/ArticleCard";
+import { ArticleSort, useInfiniteArticles } from "@/hooks/queries/useArticles";
+import ArticleCard, { ArticleCardSkeleton } from "../molecules/ArticleCard";
 import ListFilter from "../molecules/ListFilter";
+import Button from "../atoms/Button";
+import Loader from "../atoms/Loader";
+import { useLang } from "@/hooks/useLang";
 
 export default function ArticleList() {
-    const [page, setPage] = useState(1);
+    const t = useLang();
+
     const [search, setSearch] = useState("");
+    const [sort, setSort] = useState<ArticleSort>("-created_datetime");
 
-    const { data, isLoading, isError } = useArticles({ page, search });
+    const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+        useInfiniteArticles({ search, ordering: sort });
 
-    if (isLoading) return <p>Carregando artigos...</p>;
-    if (isError || !data) return <p>Erro ao carregar artigos</p>;
-
-    const { data: articles, meta } = data;
+    if (isError) return <p>Erro ao carregar artigos</p>;
 
     return (
         <section className="space-y-4">
-            <ListFilter search={search} setSearch={setSearch} setPage={setPage} />
+            <ListFilter
+                search={search}
+                setSearch={setSearch}
+                setPage={() => {}}
+                sort={sort}
+                setSort={setSort}
+            />
 
-            <div className="space-y-4">
-                {articles.map((article) => (
-                    <ArticleCard key={article.id} {...article} />
-                ))}
+            <div className="space-y-4 -mt-3">
+                {isLoading
+                    ? Array.from({ length: 10 }).map((_, i) => <ArticleCardSkeleton key={i} />)
+                    : data?.pages.map((page) =>
+                          page.data.map((article) => <ArticleCard key={article.id} {...article} />),
+                      )}
             </div>
 
-            <div className="flex justify-between items-center">
-                <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
-                    {"<"}
-                </button>
-
-                <span>
-                    {meta.page} / {meta.totalPages}
-                </span>
-
-                <button disabled={page === meta.totalPages} onClick={() => setPage((p) => p + 1)}>
-                    {">"}
-                </button>
-            </div>
+            {hasNextPage && (
+                <div className="flex justify-center mt-8">
+                    <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+                        {isFetchingNextPage ? <Loader /> : t("codeleap.common.seeMore.expand")}
+                    </Button>
+                </div>
+            )}
         </section>
     );
 }

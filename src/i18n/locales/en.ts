@@ -34,13 +34,20 @@ const translationsEN = {
                     submit: "Create",
                 },
                 toasts: {
-                    success: "Post created successfully",
-                    fail: "Post not created",
+                    success: "Article created successfully",
+                    fail: "Article not created",
                 },
             },
             search: {
                 input: {
                     placeholder: "Search articles...",
+                },
+                filter: {
+                    sort: {
+                        newest: "Newest",
+                        oldest: "Oldest",
+                        popular: "Popular",
+                    },
                 },
             },
             modal: {
@@ -48,8 +55,8 @@ const translationsEN = {
                     title: "Are you sure you want to delete this item?",
                     submit: "Delete",
                     toasts: {
-                        success: "Post deleted successfully",
-                        fail: "Post not deleted",
+                        success: "Article deleted successfully",
+                        fail: "Article not deleted",
                     },
                 },
                 edit: {
@@ -62,9 +69,13 @@ const translationsEN = {
                         },
                     },
                     toasts: {
-                        success: "Post edited successfully",
-                        fail: "Post not edited",
+                        success: "Article edited successfully",
+                        fail: "Article not edited",
                     },
+                },
+                logout: {
+                    title: "Are you sure you want to log out?",
+                    submit: "Leave",
                 },
             },
         },

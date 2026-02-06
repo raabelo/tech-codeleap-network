@@ -4,6 +4,7 @@ export type GetAllArticlesParams = {
     page?: number;
     limit?: number;
     search?: string;
+    ordering?: string
 };
 
 export type CreateArticleInput = {
@@ -20,8 +21,8 @@ export type UpdateArticleInput = {
 };
 
 export type ArticleReactionInput = {
-    userId: string;
-    type: "like" | "dislike";
+    username: string;
+    reaction: "like" | "dislike";
 };
 
 export type ArticleEntity = Article;
