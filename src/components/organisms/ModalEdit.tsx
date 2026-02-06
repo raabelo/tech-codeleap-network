@@ -12,6 +12,7 @@ import { getUser } from "@/utils/cookies/user";
 import toast from "react-hot-toast";
 import Loader from "../atoms/Loader";
 import { getErrorMessage } from "@/utils/functions/errors";
+import IconButton from "../atoms/IconButton";
 
 interface ModalEditProps {
     id: string;
@@ -58,9 +59,9 @@ export default function ModalEdit({ id, title, content }: ModalEditProps) {
 
     return (
         <>
-            <button type="button" onClick={() => setIsModalOpen(true)}>
+            <IconButton type="button" onClick={() => setIsModalOpen(true)}>
                 <IconEdit />
-            </button>
+            </IconButton>
             <Modal
                 isOpen={isModalOpen}
                 close={() => {

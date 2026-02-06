@@ -13,12 +13,25 @@ export async function GET(req: NextRequest) {
     const skip = (page - 1) * limit;
 
     const where: Prisma.ArticleWhereInput = search
-        ? {
-              OR: [
-                  { title: { contains: search, mode: "insensitive" as Prisma.QueryMode } },
-                  { content: { contains: search, mode: "insensitive" as Prisma.QueryMode } },
-              ],
-          }
+        ? search.startsWith("@")
+            ? {
+                  OR: [
+                      {
+                          username: {
+                              contains: search.slice(1),
+                              mode: "insensitive" as Prisma.QueryMode,
+                          },
+                      },
+                      { title: { contains: search, mode: "insensitive" as Prisma.QueryMode } },
+                      { content: { contains: search, mode: "insensitive" as Prisma.QueryMode } },
+                  ],
+              }
+            : {
+                  OR: [
+                      { title: { contains: search, mode: "insensitive" as Prisma.QueryMode } },
+                      { content: { contains: search, mode: "insensitive" as Prisma.QueryMode } },
+                  ],
+              }
         : {};
 
     let articles;

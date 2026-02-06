@@ -10,6 +10,7 @@ import Loader from "../atoms/Loader";
 import { useLogout } from "@/hooks/mutations/useAuth";
 import { useRouter } from "next/navigation";
 import { IconLogout } from "@tabler/icons-react";
+import IconButton from "../atoms/IconButton";
 
 const emptySubscribe = () => () => {};
 
@@ -44,9 +45,9 @@ export default function ModalLogout() {
 
     return (
         <>
-            <button type="button" onClick={() => setIsModalOpen(true)}>
+            <IconButton type="button" onClick={() => setIsModalOpen(true)}>
                 <IconLogout />
-            </button>
+            </IconButton>
             <Modal
                 isOpen={isModalOpen}
                 close={() => setIsModalOpen(false)}

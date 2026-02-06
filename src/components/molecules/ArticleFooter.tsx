@@ -1,7 +1,12 @@
 "use client";
 
 import { useReactArticle } from "@/hooks/mutations/useArticles";
-import { IconBubbleText, IconThumbDown, IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react";
+import {
+    IconThumbDown,
+    IconThumbDownFilled,
+    IconThumbUp,
+    IconThumbUpFilled,
+} from "@tabler/icons-react";
 import toast from "react-hot-toast";
 import Loader from "../atoms/Loader";
 
@@ -24,11 +29,8 @@ export default function ArticleFooter({ id, likes, dislikes, currentUser }: Arti
     const isDisliked = currentUser ? dislikes.includes(currentUser) : false;
 
     return (
-        <div className="bg-primary text-white flex justify-between p-2 px-4">
-            <div>
-                <IconBubbleText />
-            </div>
-            <div className="flex gap-4">
+        <div className="bg-white text-primary flex justify-between p-2 px-4">
+            <div className="flex gap-4 mr-0 ml-auto">
                 {mutation.isPending ? (
                     <Loader />
                 ) : (
@@ -36,17 +38,21 @@ export default function ArticleFooter({ id, likes, dislikes, currentUser }: Arti
                         <button
                             type="button"
                             onClick={() => handleReaction("like")}
-                            className="flex items-center gap-1 hover:text-success"
+                            className="flex items-center gap-1 group"
                         >
-                            {isLiked ? <IconThumbUpFilled /> : <IconThumbUp />}
+                            <span className="group-hover:text-success transition-all">
+                                {isLiked ? <IconThumbUpFilled /> : <IconThumbUp />}
+                            </span>
                             <span className="text-sm">{likes.length}</span>
                         </button>
                         <button
                             type="button"
                             onClick={() => handleReaction("dislike")}
-                            className="flex items-center gap-1 hover:text-danger"
+                            className="flex items-center gap-1 group"
                         >
-                            <IconThumbDown fill={isDisliked ? "white" : "none"} />
+                            <span className="group-hover:text-danger transition-all">
+                                {isDisliked ? <IconThumbDownFilled /> : <IconThumbDown />}
+                            </span>
                             <span className="text-sm">{dislikes.length}</span>
                         </button>
                     </>

@@ -10,6 +10,7 @@ import IconTrashcan from "../../../public/vectors/trashcan";
 import toast from "react-hot-toast";
 import Loader from "../atoms/Loader";
 import { getErrorMessage } from "@/utils/functions/errors";
+import IconButton from "../atoms/IconButton";
 
 interface ModalDeleteProps {
     id: string;
@@ -43,9 +44,9 @@ export default function ModalDelete({ id, username }: ModalDeleteProps) {
 
     return (
         <>
-            <button type="button" onClick={() => setIsModalOpen(true)}>
+            <IconButton type="button" onClick={() => setIsModalOpen(true)}>
                 <IconTrashcan />
-            </button>
+            </IconButton>
             <Modal
                 isOpen={isModalOpen}
                 close={() => setIsModalOpen(false)}

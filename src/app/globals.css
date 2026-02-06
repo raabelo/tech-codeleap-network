@@ -52,10 +52,15 @@ a {
 
 button:not([disabled]):active,
 a:not([disabled]):active {
-    opacity: 0.6;
+    opacity: 0.1;
 }
 
-textarea {
+textarea, input {
     resize: none;
     outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--color-primary);
 }

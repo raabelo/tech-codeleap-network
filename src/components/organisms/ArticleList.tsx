@@ -20,7 +20,7 @@ export default function ArticleList() {
     if (isError) return <p>Erro ao carregar artigos</p>;
 
     return (
-        <section className="space-y-4">
+        <section className="space-y-4 pb-10">
             <ListFilter
                 search={search}
                 setSearch={setSearch}

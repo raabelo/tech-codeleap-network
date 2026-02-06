@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
+import MentionTextarea from "./MentionTextarea";
 
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
     multiline?: boolean;
@@ -12,6 +13,7 @@ const baseClasses = "border border-neutral-dark rounded-lg w-full py-1.5 px-3";
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
     ({ multiline, className, value, onChange, maxLength, icon, ...props }, ref) => {
+        const [isFocused, setIsFocused] = useState(false);
         const [hasVerticalScroll, setHasVerticalScroll] = useState(false);
 
         const localRef = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
@@ -20,6 +22,15 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
 
         const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
             onChange(e.target.value);
+
+            if (multiline && combinedRef?.current) {
+                const el = combinedRef.current;
+                setHasVerticalScroll(el.scrollHeight > el.clientHeight);
+            }
+        };
+
+        const handleMentionChange = (val: string) => {
+            onChange(val);
 
             if (multiline && combinedRef?.current) {
                 const el = combinedRef.current;
@@ -39,18 +50,25 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
         return (
             <div className="relative w-full">
                 {multiline ? (
-                    <textarea
+                    <MentionTextarea
                         ref={combinedRef as React.RefObject<HTMLTextAreaElement>}
-                        className={`${baseClasses} ${className || ""}`}
+                        className={className || ""}
                         maxLength={maxLength}
                         value={value}
-                        onChange={handleChange}
-                        {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+                        onChange={handleMentionChange}
+                        {...(props as Omit<
+                            React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+                            "onChange"
+                        >)}
                     />
                 ) : (
-                    <div className={`${baseClasses} ${className || ""} flex flex-row gap-2`}>
+                    <div
+                        className={`${baseClasses} ${className || ""} flex flex-row gap-2 ${isFocused ? "border-primary" : ""}`}
+                    >
                         {icon}
                         <input
+                            onBlur={() => setIsFocused(false)}
+                            onFocus={() => setIsFocused(true)}
                             ref={combinedRef as React.RefObject<HTMLInputElement>}
                             className="size-full outline-0"
                             maxLength={maxLength}

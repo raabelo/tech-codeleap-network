@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useLang } from "@/hooks/useLang";
 import { timeAgo } from "@/utils/functions/timeAgo";
 
@@ -22,6 +22,20 @@ export default function ArticleContent({ username, content, createdAt }: Article
         setCanSeeMore(el.scrollHeight > el.clientHeight);
     }, [content]);
 
+    const formattedContent = useMemo(() => {
+        const parts = content.split(/(@\w+)/g);
+        return parts.map((part, i) => {
+            if (part.startsWith("@") && part.length > 1) {
+                return (
+                    <span key={i} className="text-primary font-bold">
+                        {part}
+                    </span>
+                );
+            }
+            return part;
+        });
+    }, [content]);
+
     return (
         <div className="p-6 w-full">
             <div className="flex justify-between text-sm text-neutral-dark mb-2">
@@ -33,7 +47,7 @@ export default function ArticleContent({ username, content, createdAt }: Article
                 ref={contentRef}
                 className={`${isSeeingMore ? "" : "line-clamp-6"} mb-2 whitespace-pre-line`}
             >
-                {content}
+                {formattedContent}
             </p>
 
             {canSeeMore && (

@@ -40,7 +40,7 @@ const translationsEN = {
             },
             search: {
                 input: {
-                    placeholder: "Search articles...",
+                    placeholder: "Search articles (start with '@' to filter by username or mention)...",
                 },
                 filter: {
                     sort: {
