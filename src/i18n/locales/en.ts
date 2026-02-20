@@ -78,6 +78,10 @@ const translationsEN = {
                     submit: "Leave",
                 },
             },
+            articles: {
+                error: "Couldn't load articles",
+                empty: "No articles found",
+            }
         },
         common: {
             cancel: "Cancel",

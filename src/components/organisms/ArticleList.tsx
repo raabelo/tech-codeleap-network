@@ -17,7 +17,7 @@ export default function ArticleList() {
     const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
         useInfiniteArticles({ search, ordering: sort });
 
-    if (isError) return <p>Erro ao carregar artigos</p>;
+    if (isError) return <p>{t("codeleap.home.articles.error")}</p>;
 
     return (
         <section className="space-y-4 pb-10">
@@ -36,6 +36,12 @@ export default function ArticleList() {
                           page.data.map((article) => <ArticleCard key={article.id} {...article} />),
                       )}
             </div>
+
+            {data?.pages[0].data.length === 0 && (
+                <p className="text-center text-neutral-dark mt-8">
+                    {t("codeleap.home.articles.empty")}
+                </p>
+            )}
 
             {hasNextPage && (
                 <div className="flex justify-center mt-8">

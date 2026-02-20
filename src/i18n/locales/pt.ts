@@ -84,7 +84,11 @@ const translationsPT: TranslationsType = {
                     title: "Tem certeza de que deseja sair?",
                     submit: "Sair",
                 },
-            },
+            },            
+            articles: {
+                error: "Não foi possível carregar os artigos",
+                empty: "Nenhum artigo encontrado",
+            }
         },
         common: {
             cancel: "Cancelar",

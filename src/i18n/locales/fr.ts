@@ -85,6 +85,10 @@ const translationsFR: TranslationsType = {
                     submit: "Quitter",
                 },
             },
+            articles: {
+                error: "Impossible de charger les articles",
+                empty: "Aucun article trouvé",
+            },
         },
         common: {
             cancel: "Annuler",
