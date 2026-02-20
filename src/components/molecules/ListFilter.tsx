@@ -1,10 +1,11 @@
 "use client";
 
-import { SetStateAction, useMemo, useState, useRef } from "react";
+import { SetStateAction, useState } from "react";
 import Input from "../atoms/Input";
 import { useLang } from "@/hooks/useLang";
 import { ArticleSort } from "@/hooks/queries/useArticles";
 import { IconFilter2, IconZoom } from "@tabler/icons-react";
+import { useDebouncedCallback } from "@/hooks/useDebouncedCallback";
 
 interface ArticleListFilterProps {
     search: string;
@@ -24,17 +25,11 @@ export default function ListFilter({
     const t = useLang();
 
     const [value, setValue] = useState(search);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    const debouncedSearch = useMemo(() => {
-        return (val: string) => {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-            timeoutRef.current = setTimeout(() => {
-                setSearch(val);
-                setPage(1);
-            }, 800);
-        };
-    }, [setSearch, setPage]);
+    const debouncedSearch = useDebouncedCallback((val: unknown) => {
+        setSearch(val as string);
+        setPage(1);
+    }, 800);
 
     const handleChange = (val: string) => {
         setValue(val);
