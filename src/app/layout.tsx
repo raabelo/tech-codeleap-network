@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import ReactQueryProvider from "@/contexts/ReactQuertContext";
+import ReactQueryProvider from "@/contexts/ReactQueryContext";
 import { Toaster } from "react-hot-toast";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
